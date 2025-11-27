@@ -72,7 +72,7 @@ echo "======================================"
 echo ""
 echo "Current system status:"
 echo "- Camera: Working ✓"
-echo "- DisplayPort: Connected ✓  
+echo "- DisplayPort: Connected ✓"
 echo "- Missing: Display compositor (Weston/X11)"
 echo ""
 echo "Solutions:"
