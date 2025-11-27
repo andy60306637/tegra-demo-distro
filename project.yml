@@ -75,6 +75,14 @@ local_conf_header:
         tegra-argus-daemon \
         tegra-mmapi \
         gstreamer1.0-plugins-tegra \
+        gstreamer1.0-plugins-nvvideosinks \
+        gstreamer1.0-plugins-nvvidconv \
+        gstreamer1.0-plugins-nvarguscamerasrc \
+        gstreamer1.0-plugins-nvv4l2camerasrc \
+        gstreamer1.0-plugins-nveglgles \
+        gstreamer1.0-plugins-bad \
+        gstreamer1.0-plugins-good \
+        gstreamer1.0-plugins-base \
         cuda-libraries \
         libv4l \
         v4l-utils \
@@ -83,6 +91,9 @@ local_conf_header:
         kernel-module-nvidia-drm \
         camera-display-test \
         i2c-tools \
+        libdrm \
+        libdrm-tests \
+        mesa-demos \
     "
     # extlinux.conf configuration for FDT and camera overlay
     UBOOT_EXTLINUX_FDT = "devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb"
