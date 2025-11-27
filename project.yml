@@ -81,6 +81,8 @@ local_conf_header:
         tegra-firmware \
         nvidia-drm-loadconf \
         kernel-module-nvidia-drm \
+        camera-display-test \
+        i2c-tools \
     "
     # extlinux.conf configuration for FDT and camera overlay
     UBOOT_EXTLINUX_FDT = "devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb"
