@@ -1,4 +1,45 @@
+# Build artifacts
+build/
 build*/
-*~
+
+# Downloaded repositories (KAS will fetch these)
+repos/
+layers/bitbake/
+layers/meta/
+layers/meta-filesystems/
+layers/meta-networking/
+layers/meta-oe/
+layers/meta-python/
+layers/meta-skeleton/
+layers/meta-tegra/
+layers/meta-tegra-community/
+layers/meta-virtualization/
+layers/scripts/
+layers/oe-init-build-env
+layers/LICENSE
+
+# Custom layer will be cloned by KAS
+meta-my-project/
+
+# Python
 *.pyc
 *.pyo
+__pycache__/
+
+# Editor files
+*.swp
+*.swo
+*~
+.*.swp
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+bitbake-cookerdaemon.log

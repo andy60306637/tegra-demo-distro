@@ -1,0 +1,101 @@
+header:
+  version: 11
+
+machine: p3768-0000-p3767-0004
+distro: my-distro
+
+target: demo-image-egl
+
+repos:
+  poky:
+    url: "git://git.yoctoproject.org/poky"
+    path: repos/poky
+    refspec: scarthgap
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: "git://git.openembedded.org/meta-openembedded"
+    path: repos/meta-openembedded
+    refspec: scarthgap
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-multimedia:
+      meta-filesystems:
+
+  meta-virtualization:
+    url: "git://git.yoctoproject.org/meta-virtualization"
+    path: repos/meta-virtualization
+    refspec: scarthgap
+
+  meta-tegra:
+    url: "https://github.com/OE4T/meta-tegra.git"
+    path: repos/meta-tegra
+    refspec: scarthgap
+    layers:
+      .:
+
+  meta-tegra-community:
+    url: "https://github.com/OE4T/meta-tegra-community"
+    path: repos/meta-tegra-community
+    refspec: scarthgap
+    layers:
+      .:
+
+  meta-my-project:
+    url: "https://github.com/andy60306637/meta-my-project.git"
+    path: repos/meta-my-project
+    refspec: main
+    layers:
+      .:
+    layers:
+      .:
+
+  meta-tegrademo:
+    path: "layers/meta-tegrademo"
+    layers:
+      .:
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+
+local_conf_header:
+  my-project: |
+    CONF_VERSION = "2"
+    TEGRA_FLASH_USE_NVME = "1"
+    TEGRA_BOARDSKU = "0004"
+    IMAGE_INSTALL:append = " \
+        tegra-argus-daemon \
+        tegra-mmapi \
+        gstreamer1.0-plugins-tegra \
+        cuda-libraries \
+        libv4l \
+        v4l-utils \
+        tegra-firmware \
+        nvidia-drm-loadconf \
+        kernel-module-nvidia-drm \
+    "
+    # extlinux.conf configuration for FDT and camera overlay
+    UBOOT_EXTLINUX_FDT = "devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb"
+    UBOOT_EXTLINUX_FDTOVERLAYS = "devicetree/tegra234-p3767-camera-p3768-imx219-C.dtbo"
+    # Enable nvidia-drm with modeset for DisplayPort/HDMI support
+    KERNEL_ARGS:append = " nvidia-drm.modeset=1 nvidia-drm.fbdev=1"
+    EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+    USER_CLASSES ?= "buildstats"
+    PATCHRESOLVE = "noop"
+    BB_DISKMON_DIRS ??= "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        HALT,${TMPDIR},100M,1K \
+        HALT,${DL_DIR},100M,1K \
+        HALT,${SSTATE_DIR},100M,1K \
+        HALT,/tmp,10M,1K"
