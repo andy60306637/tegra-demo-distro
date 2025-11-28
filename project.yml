@@ -71,6 +71,11 @@ local_conf_header:
     CONF_VERSION = "2"
     TEGRA_FLASH_USE_NVME = "1"
     TEGRA_BOARDSKU = "0004"
+    # Enable systemd as init system
+    DISTRO_FEATURES:append = " systemd pam"
+    DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " sysvinit"
+    VIRTUAL-RUNTIME_init_manager = "systemd"
+    VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
     IMAGE_INSTALL:append = " \
         tegra-argus-daemon \
         tegra-mmapi \
@@ -94,10 +99,10 @@ local_conf_header:
         libdrm \
         libdrm-tests \
         mesa-demos \
-        packagegroup-core-x11 \
-        weston \
-        weston-init \
-        weston-examples \
+        camera-kiosk \
+        sudo \
+        systemd \
+        systemd-serialgetty \
     "
     # extlinux.conf configuration for FDT and camera overlay
     UBOOT_EXTLINUX_FDT = "devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb"
